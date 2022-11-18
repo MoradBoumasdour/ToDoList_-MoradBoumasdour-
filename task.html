@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  min-width: 150px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: whitesmoke;
+}
+
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove margins and padding from the list */
+ul {
+ 
+}
+
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background:whitesmoke;
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: whitesmoke;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: whitesmoke;
+  color:rgb(0, 0, 0);
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  margin-right: 50px;
+  border-color: green;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  right: 70px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+  border-color: green;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  background: #d62828;
+  right: 0;
+  top: 0;
+  color: white;
+  border-radius: 100%;
+  border-color: #d62828;
+  padding: 10px 14px 10px 14px;
+}
+
+.close:hover {
+  background-color: #d62828;
+  color: white;
+}
+
+/* Style the header */
+.header {
+  font: Arial;
+  background-color: whitesmoke;
+  padding: 30px 40px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+  margin-left: 20%;
+}
+
+/* Style the input */
+input {
+  margin-left: 20%;
+  border-color: #80cfa9;
+  border-radius: 3%;
+  width: 50%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+  font: Arial;
+}
+
+/*Style the "Clear all" button*/
+.clrBtn {
+    font-size: 16px;
+    width: 120px;
+    padding: 10px;
+    margin-left: 45%;
+    border-color: #80cfa9;
+    border-radius: 10%;
+    color: black;
+    background-color: whitesmoke;
+}
+
+/* Style the "Add Item" button */
+.addBtn {
+  padding: 10px;
+  width: 10%;
+  background: whitesmoke;
+  color: black;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10%;
+  border-color: #80cfa9;
+}
+
+.addBtn:hover {
+  background-color:whitesmoke;
+}
+</style>
+</head>
+<body>
+
+<div id="myDIV" class="header">
+  <h2 style="margin:5px" font-family="Arial">To Do List</h2>
+  <input type="text" id="myInput" placeholder="Name...">
+  <span onclick="newElement()" class="addBtn">Add Item</span>
+</div>
+
+<ul id="myUL">
+ 
+</ul>
+
+<div class="center">
+    <button class="clrBtn">Clear Items</button>
+</div>
+
+<script>
+// Create a "close" button and append it to each list item
+var myNodelist =document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Clear all button js
+var close = document.getElementsByClassName("close");
+var i;
+
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+    margin-right
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
